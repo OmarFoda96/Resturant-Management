@@ -1,0 +1,19 @@
+.icons {
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+.number {
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  padding: 2px 4px;
+  background: #ff6600;
+  text-align: left;
+  border-radius: 7px;
+  margin-left: 6px;
+}
+
+.num {
+  position: relative;
+}

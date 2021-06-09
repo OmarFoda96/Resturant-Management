@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a
+    class="navbar-brand h1"
+    [routerLink]="role == 'user' ? '/' : '/Admin'"
+    routerLinkActive="active"
+  >
+    ادارة المطعم
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul *ngIf="role == 'user'" class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="role == 'user' ? '/' : '/Admin'"
+          routerLinkActive="active"
+          >الرئيسية <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/Meals']" routerLinkActive="active"
+          >الوجبات</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/My-Previous-Meals"
+          routerLinkActive="active"
+          >طلباتي</a
+        >
+      </li>
+    </ul>
+    <ul *ngIf="role == 'admin'" class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Admin" routerLinkActive="active"
+          >الرئيسية <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="['/Admin/Categories']"
+          routerLinkActive="active"
+          >الاصناف</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="['/Admin/Admin-Meals']"
+          routerLinkActive="active"
+          >الوجبات</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/Admin/Sales" routerLinkActive="active"
+          >المبيعات</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLink]="['/Admin/Users']"
+          routerLinkActive="active"
+          >المستخدمين</a
+        >
+      </li>
+    </ul>
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item my-auto" *ngIf="role == 'user'">
+        <app-count></app-count>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          حسابي
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click)="logOut()">تسجيل الخروج</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,286 @@
+<app-spinner *ngIf="!dataLoaded"></app-spinner>
+
+<div
+  *ngIf="dataLoaded"
+  class="container my-5"
+  data-aos="fade-in"
+  data-aos-duration="1000"
+>
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-lg-4 col-12">
+              <input
+                type="text"
+                #key
+                (keyup)="search(key.value)"
+                class="form-control"
+                placeholder="بحث..."
+              />
+            </div>
+            <div class="col-lg-8 col-12 text-left mb-3">
+              <button (click)="open(content)" class="btn btn-primary">
+                إضافة الصنف
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-bordered text-center">
+            <thead>
+              <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">
+                  اسم الصنف باللغة العربية
+                </th>
+                <th scope="col" class="text-center">
+                  اسم الصنف باللغة الانجليزية
+                </th>
+                <th scope="col" class="text-center"></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="categories.length > 0">
+              <tr *ngFor="let gov of categories; let i = index">
+                <th class="text-center" scope="row">{{ i + 1 }}</th>
+                <td class="text-center">
+                  {{ gov.nameAr }}
+                </td>
+                <td class="text-center">
+                  {{ gov.nameEn }}
+                </td>
+                <td class="text-center">
+                  <i
+                    (click)="openEdit(content2, gov)"
+                    class="fa fa-pencil text-primary mx-2 f-15 cursor-pointer"
+                    ngbTooltip="تعديل"
+                  ></i>
+                  <i
+                    (click)="openDelete(content3, gov)"
+                    class="fa fa-trash-alt text-danger mx-2 f-15 cursor-pointer"
+                    ngbTooltip="حذف"
+                  ></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h2 *ngIf="categories.length < 1">لم يتم اضافة اي اصناف</h2>
+        </div>
+        <div class="card-footer">
+          <div class="row p-2">
+            <ngb-pagination
+              [collectionSize]="collectionSize"
+              [(page)]="page"
+              [pageSize]="pageSize"
+              [maxSize]="5"
+              (pageChange)="refreshView()"
+            >
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">إضافة الصنف</h4>
+    <!-- <button
+          type="button"
+          class="close float-left"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-lg-3 col-12">
+          <label for="">اسم الصنف باللغة العربية</label>
+          <input
+            formControlName="nameAr"
+            type="text"
+            [class]="
+              inputNameAr.invalid && inputNameAr.touched
+                ? 'form-control border-danger'
+                : 'form-control'
+            "
+          />
+          <div
+            *ngIf="
+              inputNameAr.invalid && (inputNameAr.dirty || inputNameAr.touched)
+            "
+            class="text-danger"
+          >
+            <p class="text-danger" *ngIf="inputNameAr.errors.required">
+              هذه الخانة مطلوبة
+            </p>
+            <p class="text-danger" *ngIf="inputNameAr.errors.pattern">
+              يجب إدخال اسم الصنف باللغة العربية
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-12">
+          <label for="">اسم الصنف باللغة الانجليزية</label>
+          <input
+            formControlName="nameEn"
+            type="text"
+            [class]="
+              inputNameEn.invalid && inputNameEn.touched
+                ? 'form-control border-danger'
+                : 'form-control'
+            "
+          />
+          <div
+            *ngIf="
+              inputNameEn.invalid && (inputNameEn.dirty || inputNameEn.touched)
+            "
+            class="text-danger"
+          >
+            <p class="text-danger" *ngIf="inputNameEn.errors.required">
+              هذه الخانة مطلوبة
+            </p>
+            <p class="text-danger" *ngIf="inputNameEn.errors.pattern">
+              يجب إدخال اسم الصنف باللغة الانجليزية
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="form.invalid"
+      (click)="onSubmit()"
+    >
+      حفظ
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="modal.close('Close click')"
+    >
+      الغاء
+    </button>
+  </div>
+</ng-template>
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">تعديل الصنف</h4>
+    <!-- <button
+          type="button"
+          class="close float-left"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editForm">
+      <div class="row">
+        <div class="col-lg-3 col-12">
+          <label for="">اسم الصنف باللغة العربية</label>
+          <input
+            formControlName="nameAr"
+            type="text"
+            [class]="
+              editNameAr.invalid && editNameAr.touched
+                ? 'form-control border-danger'
+                : 'form-control'
+            "
+          />
+          <div
+            *ngIf="
+              editNameAr.invalid && (editNameAr.dirty || editNameAr.touched)
+            "
+            class="text-danger"
+          >
+            <p class="text-danger" *ngIf="editNameAr.errors.required">
+              هذه الخانة مطلوبة
+            </p>
+            <p class="text-danger" *ngIf="editNameAr.errors.pattern">
+              يجب إدخال اسم الصنف باللغة العربية
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-12">
+          <label for="">اسم الصنف باللغة الانجليزية</label>
+          <input
+            formControlName="nameEn"
+            type="text"
+            [class]="
+              editNameEn.invalid && editNameEn.touched
+                ? 'form-control border-danger'
+                : 'form-control'
+            "
+          />
+          <div
+            *ngIf="
+              editNameEn.invalid && (editNameEn.dirty || editNameEn.touched)
+            "
+            class="text-danger"
+          >
+            <p class="text-danger" *ngIf="editNameEn.errors.required">
+              هذه الخانة مطلوبة
+            </p>
+            <p class="text-danger" *ngIf="editNameEn.errors.pattern">
+              يجب إدخال اسم الصنف باللغة الانجليزية
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="editForm.invalid"
+      (click)="onSubmitEdit()"
+    >
+      حفظ
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="modal.close('Close click')"
+    >
+      الغاء
+    </button>
+  </div>
+</ng-template>
+<ng-template #content3 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">حذف الصنف</h4>
+    <!-- <button
+          type="button"
+          class="close float-left"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+  </div>
+  <div class="modal-body">
+    <h2>هل بالفعل تريد حذف الصنف</h2>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success" (click)="onDelete()">
+      حذف
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="modal.close('Close click')"
+    >
+      الغاء
+    </button>
+  </div>
+</ng-template>

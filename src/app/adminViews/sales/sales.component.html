@@ -1,0 +1,83 @@
+<app-spinner *ngIf="!dataLoaded"></app-spinner>
+
+<div
+  *ngIf="dataLoaded"
+  class="container my-5"
+  data-aos="fade-in"
+  data-aos-duration="1000"
+>
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-lg-3 col-12">
+              <input
+                type="text"
+                #key
+                (keyup)="search($event.target)"
+                class="form-control"
+                placeholder="بحث باسم الوجبة"
+              />
+            </div>
+            <div class="col-lg-3 col-12">
+              <select
+                (change)="searchByCategory($event.target)"
+                class="form-control"
+                placeholder=""
+              >
+                <option value="null">بحث بالصنف</option>
+                <option *ngFor="let item of categories" [value]="item.id">
+                  {{ item.nameAr }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">صورة الوجبة</th>
+                  <th scope="col">الاسم</th>
+                  <th scope="col">الصنف</th>
+                  <th scope="col">السعر</th>
+                  <th scope="col">الكمية</th>
+                  <th scope="col">تاريخ العملية</th>
+                  <th scope="col">اجمالي السعر</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of transactions">
+                  <td class="text-right">
+                    <img
+                      [src]="url + '/' + item.product.image"
+                      [alt]="item.product.nameAr"
+                    />
+                  </td>
+                  <td>{{ item.product.nameAr }}</td>
+                  <td>{{ item.product.category.nameAr }}</td>
+                  <td>{{ item.priceProduct }} جنيه مصري</td>
+                  <td>{{ item.count }}</td>
+                  <td>{{ item.createdAt | date: "yyyy-MM-dd" }}</td>
+                  <td>{{ item.priceProduct * item.count }} جنيه مصري</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <div class="row p-2">
+              <ngb-pagination
+                [collectionSize]="collectionSize"
+                [(page)]="page"
+                [pageSize]="pageSize"
+                [maxSize]="5"
+                (pageChange)="refreshView()"
+              >
+              </ngb-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

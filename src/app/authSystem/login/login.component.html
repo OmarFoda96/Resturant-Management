@@ -1,0 +1,63 @@
+<app-spinner *ngIf="loading"></app-spinner>
+
+<div class="container logForm" *ngIf="!loading">
+  <div class="row my-3">
+    <div class="col-md-4 col-12 ourForm mx-auto">
+      <div class="row holder">
+        <div class="col-md-5 col-12 vert">
+          <h3 class="my-auto">مرحبا بك</h3>
+        </div>
+      </div>
+      <div class="row my-2" *ngIf="response.status != 0">
+        <div class="col-12">
+          <p class="alert alert-danger">
+            {{ response.message }}
+          </p>
+        </div>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="row mt-3">
+          <div class="col-12">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="اسم المستخدم"
+                formControlName="Username"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="كلمة المرور"
+                formControlName="password"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <a routerLink="/ForgetPassword">فقدت كلمة المرور</a>
+          </div>
+          <div class="col-12 mt-2">
+            <button
+              class="btn btn-primary w-100"
+              [disabled]="loginForm.invalid"
+              type="submit"
+            >
+              تسجيل الدخول
+            </button>
+          </div>
+          <div class="col-12 my-2">
+            مستخدم جديد؟<a routerLink="/Register">تسجيل جديد</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

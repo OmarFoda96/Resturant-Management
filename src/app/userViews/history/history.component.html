@@ -1,0 +1,69 @@
+<app-spinner *ngIf="!dataLoaded"></app-spinner>
+<div *ngIf="dataLoaded" class="container my-5">
+  <div class="row">
+    <div class="col-6">
+      <h1 class="titles text-dark">عملياتي</h1>
+      <p class="h3 text-dark">{{ kinds.length }} لديك 9 عمليات شراء</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th scope="col" class="text-center">عدد الوجبةات</th>
+            <th scope="col">تاريخ الشراء</th>
+            <th scope="col">اجمالي السعر</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of kinds; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td class="text-center">
+              {{ item.Meals.length }}
+            </td>
+            <td>{{ item.transactionDate | date: "yyyy-MM-dd" }}</td>
+            <td>{{ item.finalPrice }} جنيه مصري</td>
+            <td
+              (click)="refund(item, content2)"
+              class="text-center cursor-pointer text-danger"
+              ngbTooltip="تريد ارجاع الوجبة؟"
+            >
+              <i class="fas fa-undo"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">استرجاع عملية الشراء</h4>
+    <!-- <button
+          type="button"
+          class="close float-left"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+  </div>
+  <div class="modal-body">
+    <h1>هل تريد استرجاع العملية بالفعل</h1>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success" (click)="confirmRefund()">
+      نعم
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="modal.close('Close click')"
+    >
+      الغاء
+    </button>
+  </div>
+</ng-template>

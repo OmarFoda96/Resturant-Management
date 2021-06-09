@@ -1,0 +1,32 @@
+.passenger {
+  background-color: white;
+  box-shadow: 0 4px 7px 2px #bbb;
+  border: 1px solid #bbb;
+  padding: 10px 5px;
+  border-radius: 5px;
+}
+
+.delete {
+  position: absolute;
+  left: 20px;
+  bottom: -20px;
+  cursor: pointer;
+}
+
+.addPassenger {
+  cursor: pointer;
+}
+
+.bg[_ngcontent-jjn-c45] h1[_ngcontent-jjn-c45] {
+  right: 47% !important;
+}
+
+.spin {
+  margin: 18% 0;
+  width: 10rem;
+  height: 10rem;
+}
+
+* {
+  text-align: right;
+}

@@ -1,0 +1,57 @@
+<app-spinner *ngIf="!dataLoaded"></app-spinner>
+<div *ngIf="dataLoaded" class="container my-5">
+  <div class="row" *ngIf="!sellDone">
+    <div class="col-6">
+      <h1 class="titles text-dark">سلة الشراء</h1>
+      <p class="h3 text-dark">{{ kinds.length }} اصناف في سلتك</p>
+    </div>
+    <div class="col-6 text-left">
+      <p class="h3 text-dark">&nbsp;</p>
+      <button class="btn btn-primary my-auto" (click)="goPayment()">
+        تأكيد الشراء
+      </button>
+    </div>
+  </div>
+  <div class="row" *ngIf="sellDone">
+    <div class="col-6">
+      <h1 class="titles text-dark">تهانينا</h1>
+      <p class="h3 text-dark">تمت العملية بنجاح</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">صورة الوجبة</th>
+            <th scope="col">الاسم</th>
+            <th scope="col">السعر</th>
+            <th scope="col">الكمية</th>
+            <th scope="col">اجمالي السعر</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of kinds">
+            <td class="text-right">
+              <img
+                [src]="url + '/' + item.product.image"
+                [alt]="item.product.nameAr"
+              />
+            </td>
+            <td>{{ item.product.nameAr }}</td>
+            <td>{{ item.priceProduct }} جنيه مصري</td>
+            <td>{{ item.count }}</td>
+            <td>{{ item.priceProduct * item.count }} جنيه مصري</td>
+          </tr>
+          <tr class="bg-primary">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-light">{{ finalPrice }} جنيه مصري</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

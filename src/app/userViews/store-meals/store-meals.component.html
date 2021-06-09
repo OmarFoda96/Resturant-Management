@@ -1,0 +1,82 @@
+<app-spinner *ngIf="!dataLoaded"></app-spinner>
+<div *ngIf="dataLoaded" class="container my-5">
+  <div class="row">
+    <div class="col-6 offset-2 text-right">
+      <h1 class="h2 text-dark titles">ابحث عن وجباتك من هنا</h1>
+    </div>
+    <div class="col-4 text-left">
+      <button
+        class="btn btn-warning d-inline mx-4"
+        [disabled]="cartService.Meals.length <= 0"
+        (click)="goCart(content)"
+      >
+        الى سلة الشراء
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 text-right">
+      <div class="search-list">
+        <div class="form-group">
+          <label for=""> ابحث بالسعر </label>
+          <input
+            type="number"
+            (change)="searchByPrice($event)"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for=""> ابحث بالنوع </label>
+          <select class="form-control" (change)="searchByCategory($event)">
+            <option value=""></option>
+            <option *ngFor="let item of categories" [value]="item.id">
+              {{ item.nameAr }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for=""> ابحث باسم الوجبة </label>
+          <input
+            type="text"
+            class="form-control"
+            (keyup)="searchByName($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="row MealsContainer">
+        <div class="col-lg-4 col-md-6 col-12 my-2" *ngFor="let meal of Meals">
+          <app-meal-card [meal]="meal"></app-meal-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">وسيلة الدفع</h4>
+  </div>
+  <div class="modal-body">
+    <h3 *ngIf="dataLoaded">برجاء اختيار وسيلة الدفع ؟</h3>
+    <app-spinner *ngIf="!dataLoaded"></app-spinner>
+  </div>
+  <div *ngIf="dataLoaded" class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="goPayment(true)"
+    >
+      رصيدي
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="goPayment(false)"
+    >
+      فيزا
+    </button>
+  </div>
+</ng-template>

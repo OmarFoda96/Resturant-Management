@@ -1,0 +1,24 @@
+h1 {
+    font-size: 315px;
+    font-weight: bolder;
+}
+
+/* .text-container {
+    position: relative;
+}
+
+.f4 {
+    position: absolute;
+    left: 275px;
+    z-index: 1;
+}
+
+.l4 {
+    position: absolute;
+    right: 255px;
+    z-index: -1;
+}
+
+.text-primary {
+    z-index: 2;
+} */

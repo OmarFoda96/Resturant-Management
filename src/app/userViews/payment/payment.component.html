@@ -1,0 +1,119 @@
+<app-spinner *ngIf="!dataLoaded"></app-spinner>
+<div *ngIf="dataLoaded" class="container my-5">
+  <div class="row">
+    <div class="col-lg-12 col-md-6 col-12">
+      <div class="row">
+        <div class="col-md-6 col-12">
+          <h3>دفع بواسطة</h3>
+        </div>
+      </div>
+      <form [formGroup]="paymentForm">
+        <div class="passenger p-4 mb-3">
+          <h5>
+            <i class="fas fa-circle"></i>
+            فيزا/ماستر كارد
+          </h5>
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label for="">رقم البطاقة</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="رقم البطاقة"
+                  minlength="16"
+                  maxlength="16"
+                  formControlName="masterCardNumber"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label for="">الاسم على البطاقة</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="nameOnCard"
+                  placeholder="الاسم على البطاقة"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label for="">تاريخ انتهاء صلاحية البطاقة</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="yyyy/mm"
+                  formControlName="expireDate"
+                />
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <div class="form-group">
+                <label for="">الرقم السرى</label>
+                <input
+                  minlength="3"
+                  maxlength="3"
+                  type="text"
+                  class="form-control"
+                  formControlName="csv"
+                  placeholder="csv"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-6 col-12"></div>
+          <div class="col-md-3 col-12"></div>
+          <div class="col-md-3 col-12">
+            <button
+              class="btn btn-primary text-center w-100"
+              [disabled]="paymentForm.invalid"
+              (click)="payment(content)"
+            >
+              الدفع
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">تأكيد الدفع</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div *ngIf="paymentDone.status == 1" class="alert alert-sucess">
+          تمت العملية بنجاح
+        </div>
+        <div *ngIf="paymentDone1.status == 1" class="alert alert-danger">
+          لم تتم العملية بنجاح
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="confirmFrom">
+      <div class="form-group">
+        <label for="">OTP: </label>
+        <input type="text" class="form-control" formControlName="otp" />
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="checkPayment()">
+      تأكيد
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="modal.close('Save click')"
+    >
+      إلغاء
+    </button>
+  </div>
+</ng-template>

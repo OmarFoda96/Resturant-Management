@@ -1,0 +1,17 @@
+.bg-dark {
+  background-color: #1b1b1b!important;
+}
+
+.navbar-brand {
+  display: inline-block;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-right: 1rem;
+  font-size: 30px;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  font-size: 22px;
+}
