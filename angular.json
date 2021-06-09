@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "PizzaStore": {
+    "resturant-management": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/PizzaStore",
+            "outputPath": "dist/resturant-management",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "PizzaStore:build"
+            "browserTarget": "resturant-management:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "PizzaStore:build:production"
+              "browserTarget": "resturant-management:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "PizzaStore:build"
+            "browserTarget": "resturant-management:build"
           }
         },
         "test": {
@@ -106,18 +106,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "PizzaStore:serve"
+            "devServerTarget": "resturant-management:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "PizzaStore:serve:production"
+              "devServerTarget": "resturant-management:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "PizzaStore",
+  "defaultProject": "resturant-management",
   "cli": {
     "analytics": false
   }
