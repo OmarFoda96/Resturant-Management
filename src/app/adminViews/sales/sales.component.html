@@ -50,12 +50,12 @@
                 <tr *ngFor="let item of transactions">
                   <td class="text-right">
                     <img
-                      [src]="url + '/' + item.product.image"
-                      [alt]="item.product.nameAr"
+                      [src]="url + '/' + item.meal.image"
+                      [alt]="item.meal.nameAr"
                     />
                   </td>
-                  <td>{{ item.product.nameAr }}</td>
-                  <td>{{ item.product.category.nameAr }}</td>
+                  <td>{{ item.meal.nameAr }}</td>
+                  <td>{{ item.meal.category.nameAr }}</td>
                   <td>{{ item.priceProduct }} جنيه مصري</td>
                   <td>{{ item.count }}</td>
                   <td>{{ item.createdAt | date: "yyyy-MM-dd" }}</td>

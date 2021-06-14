@@ -1,6 +1,6 @@
 import { MealsModel } from './Meals.Interface';
 export interface CartModel {
-  product: MealsModel;
+  meal: MealsModel;
   count: number;
   priceProduct: number;
   isDone: boolean;
@@ -9,6 +9,6 @@ export interface CartModel {
 }
 export interface StatsModel {
   countTransactionDone: string;
-  countProduct: string;
+  countMeal: string;
   countUserWebsite: string;
 }

@@ -12,4 +12,5 @@ export interface UserModel {
   Notes: string;
   Password: string;
   image: string;
+  countRefund: number;
 }

@@ -48,21 +48,21 @@ export class HistoryComponent implements OnInit {
               finalPrice: 0,
               Meals: [
                 {
-                  productId: element.product.id,
-                  productName: element.product.nameAr,
-                  productPrice: element.product.price,
+                  mealId: element.meal.id,
+                  mealName: element.meal.nameAr,
+                  mealPrice: element.meal.price,
                   count: element.count,
-                  totalPrice: +element.count * element.product.price,
+                  totalPrice: +element.count * element.meal.price,
                 },
               ],
             });
           } else {
             this.newMealsShow[x].Meals.push({
-              productId: element.product.id,
-              productName: element.product.nameAr,
-              productPrice: element.product.price,
+              mealId: element.meal.id,
+              mealName: element.meal.nameAr,
+              mealPrice: element.meal.price,
               count: element.count,
-              totalPrice: +element.count * element.product.price,
+              totalPrice: +element.count * element.meal.price,
             });
           }
         } else {
@@ -72,11 +72,11 @@ export class HistoryComponent implements OnInit {
             finalPrice: 0,
             Meals: [
               {
-                productId: element.product.id,
-                productName: element.product.nameAr,
-                productPrice: element.product.price,
+                mealId: element.meal.id,
+                mealName: element.meal.nameAr,
+                mealPrice: element.meal.price,
                 count: element.count,
-                totalPrice: +element.count * element.product.price,
+                totalPrice: +element.count * element.meal.price,
               },
             ],
           });

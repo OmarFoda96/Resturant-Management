@@ -95,7 +95,7 @@ export class StoreMealsComponent implements OnInit {
     });
   }
 
-  newProduct = [];
+  newMeal = [];
   goCart(content) {
     this.getFinalPrice();
     this.modalService.open(content);
@@ -104,22 +104,22 @@ export class StoreMealsComponent implements OnInit {
       return a.id - b.id;
     });
     for (let i = 0; i < currentMeals.length; i++) {
-      if (this.newProduct.length > 0) {
-        let x = this.newProduct.find((el) => {
-          return el.productId === currentMeals[i].id;
+      if (this.newMeal.length > 0) {
+        let x = this.newMeal.find((el) => {
+          return el.mealId === currentMeals[i].id;
         });
 
         if (x) {
           x.count++;
         } else {
-          this.newProduct.push({
-            productId: currentMeals[i].id,
+          this.newMeal.push({
+            mealId: currentMeals[i].id,
             count: 1,
           });
         }
       } else {
-        this.newProduct.push({
-          productId: currentMeals[i].id,
+        this.newMeal.push({
+          mealId: currentMeals[i].id,
           count: 0,
         });
         i--;
@@ -128,9 +128,9 @@ export class StoreMealsComponent implements OnInit {
   }
 
   balance = parseFloat(localStorage.getItem('balance'));
-  sendCartItem(productList, paymentWay) {
+  sendCartItem(mealList, paymentWay) {
     let body = {
-      product: productList,
+      meals: mealList,
       isDone: false,
       totalPrice: this.totalPrice,
       paymentType: paymentWay,
@@ -161,14 +161,14 @@ export class StoreMealsComponent implements OnInit {
         );
       } else {
         this.dataLoaded = true;
-        this.sendCartItem(this.newProduct, paymentWay);
+        this.sendCartItem(this.newMeal, paymentWay);
         this.balance = this.balance - this.totalPrice;
         localStorage.setItem('balance', this.balance.toString());
         this.MealsService.balance = this.balance.toString();
       }
     } else {
       this.dataLoaded = true;
-      this.sendCartItem(this.newProduct, paymentWay);
+      this.sendCartItem(this.newMeal, paymentWay);
       this.modalService.dismissAll();
     }
   }

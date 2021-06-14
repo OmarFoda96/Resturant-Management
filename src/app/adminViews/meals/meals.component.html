@@ -47,6 +47,7 @@
                 <th scope="col" class="text-center">الصنف</th>
                 <th scope="col" class="text-center">الكمية</th>
                 <th scope="col" class="text-center">السعر</th>
+                <th scope="col" class="text-center">عدد مرات الارجاع</th>
                 <th scope="col" class="text-center">صورة للوجبة</th>
                 <th scope="col" class="text-center"></th>
               </tr>
@@ -61,10 +62,10 @@
                   {{ item.nameEn }}
                 </td>
                 <td class="text-center">
-                  {{ item.descriptionAr | slice: 0:50 }}
+                  {{ item.recipesAr | slice: 0:50 }}
                 </td>
                 <td class="text-center">
-                  {{ item.descriptionEn | slice: 0:50 }}
+                  {{ item.recipesEn | slice: 0:50 }}
                 </td>
                 <td class="text-center">
                   {{ item.category.nameAr }}
@@ -75,6 +76,9 @@
                 </td>
                 <td class="text-center">
                   {{ item.price }}
+                </td>
+                <td class="text-center">
+                  {{ item.countRefund }}
                 </td>
                 <td class="text-center">
                   <i
@@ -130,7 +134,8 @@
         </button> -->
   </div>
   <div class="modal-body">
-    <form [formGroup]="form">
+    <app-spinner *ngIf="!dataLoaded"></app-spinner>
+    <form [formGroup]="form" *ngIf="dataLoaded">
       <div class="row">
         <div class="col-lg-3 col-12">
           <label for="">اسم الوجبة باللغة العربية</label>
@@ -208,82 +213,6 @@
             </p>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3 col-12">
-          <label for="">وصف الوجبة باللغة العربية</label>
-          <input
-            formControlName="descriptionAr"
-            type="text"
-            [class]="
-              inputdescriptionAr.invalid && inputdescriptionAr.touched
-                ? 'form-control border-danger'
-                : 'form-control'
-            "
-          />
-          <div
-            *ngIf="
-              inputdescriptionAr.invalid &&
-              (inputdescriptionAr.dirty || inputdescriptionAr.touched)
-            "
-            class="text-danger"
-          >
-            <p class="text-danger" *ngIf="inputdescriptionAr.errors.required">
-              هذه الخانة مطلوبة
-            </p>
-            <p class="text-danger" *ngIf="inputdescriptionAr.errors.pattern">
-              يجب إدخال وصف الوجبة باللغة العربية
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-12">
-          <label for="">وصف الوجبة باللغة الانجليزية</label>
-          <input
-            formControlName="descriptionEn"
-            type="text"
-            [class]="
-              inputdescriptionEn.invalid && inputdescriptionEn.touched
-                ? 'form-control border-danger'
-                : 'form-control'
-            "
-          />
-          <div
-            *ngIf="
-              inputdescriptionEn.invalid &&
-              (inputdescriptionEn.dirty || inputdescriptionEn.touched)
-            "
-            class="text-danger"
-          >
-            <p class="text-danger" *ngIf="inputdescriptionEn.errors.required">
-              هذه الخانة مطلوبة
-            </p>
-            <p class="text-danger" *ngIf="inputdescriptionEn.errors.pattern">
-              يجب إدخال وصف الوجبة باللغة الانجليزية
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-12">
-          <label for="">الكمية</label>
-          <input
-            formControlName="count"
-            type="number"
-            [class]="
-              inputcount.invalid && inputcount.touched
-                ? 'form-control border-danger'
-                : 'form-control'
-            "
-          />
-          <div
-            *ngIf="
-              inputcount.invalid && (inputcount.dirty || inputcount.touched)
-            "
-            class="text-danger"
-          >
-            <p class="text-danger" *ngIf="inputcount.errors.required">
-              هذه الخانة مطلوبة
-            </p>
-          </div>
-        </div>
         <div class="col-lg-3 col-12">
           <label for="">السعر</label>
           <input
@@ -310,6 +239,83 @@
 
       <div class="row">
         <div class="col-lg-3 col-12">
+          <label for="">وصف الوجبة باللغة العربية</label>
+          <input
+            formControlName="recipesAr"
+            type="text"
+            [class]="
+              inputrecipesAr.invalid && inputrecipesAr.touched
+                ? 'form-control border-danger'
+                : 'form-control'
+            "
+          />
+          <div
+            *ngIf="
+              inputrecipesAr.invalid &&
+              (inputrecipesAr.dirty || inputrecipesAr.touched)
+            "
+            class="text-danger"
+          >
+            <p class="text-danger" *ngIf="inputrecipesAr.errors.required">
+              هذه الخانة مطلوبة
+            </p>
+            <p class="text-danger" *ngIf="inputrecipesAr.errors.pattern">
+              يجب إدخال وصف الوجبة باللغة العربية
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-12">
+          <label for="">وصف الوجبة باللغة الانجليزية</label>
+          <input
+            formControlName="recipesEn"
+            type="text"
+            [class]="
+              inputrecipesEn.invalid && inputrecipesEn.touched
+                ? 'form-control border-danger'
+                : 'form-control'
+            "
+          />
+          <div
+            *ngIf="
+              inputrecipesEn.invalid &&
+              (inputrecipesEn.dirty || inputrecipesEn.touched)
+            "
+            class="text-danger"
+          >
+            <p class="text-danger" *ngIf="inputrecipesEn.errors.required">
+              هذه الخانة مطلوبة
+            </p>
+            <p class="text-danger" *ngIf="inputrecipesEn.errors.pattern">
+              يجب إدخال وصف الوجبة باللغة الانجليزية
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-12">
+          <label for="">الكمية</label>
+          <input
+            formControlName="count"
+            type="number"
+            [class]="
+              inputcount.invalid && inputcount.touched
+                ? 'form-control border-danger'
+                : 'form-control'
+            "
+          />
+          <div
+            *ngIf="
+              inputcount.invalid && (inputcount.dirty || inputcount.touched)
+            "
+            class="text-danger"
+          >
+            <p class="text-danger" *ngIf="inputcount.errors.required">
+              هذه الخانة مطلوبة
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3 col-12">
           <label for="">صورة الوجبة</label>
           <input
             type="file"
@@ -321,7 +327,7 @@
       </div>
     </form>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" *ngIf="dataLoaded">
     <button
       type="submit"
       class="btn btn-success"
@@ -352,7 +358,8 @@
         </button> -->
   </div>
   <div class="modal-body">
-    <form [formGroup]="editForm">
+    <app-spinner *ngIf="!dataLoaded"></app-spinner>
+    <form [formGroup]="editForm" *ngIf="dataLoaded">
       <div class="row">
         <div class="col-lg-3 col-12">
           <label for="">اسم الوجبة باللغة العربية</label>
@@ -430,30 +437,50 @@
             </p>
           </div>
         </div>
+        <div class="col-lg-3 col-12">
+          <label for="">السعر</label>
+          <input
+            formControlName="price"
+            type="text"
+            [class]="
+              editprice.invalid && editprice.touched
+                ? 'form-control border-danger'
+                : 'form-control'
+            "
+          />
+          <div
+            *ngIf="editprice.invalid && (editprice.dirty || editprice.touched)"
+            class="text-danger"
+          >
+            <p class="text-danger" *ngIf="editprice.errors.required">
+              هذه الخانة مطلوبة
+            </p>
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-lg-3 col-12">
           <label for="">وصف الوجبة باللغة العربية</label>
           <input
-            formControlName="descriptionAr"
+            formControlName="recipesAr"
             type="text"
             [class]="
-              editdescriptionAr.invalid && editdescriptionAr.touched
+              editrecipesAr.invalid && editrecipesAr.touched
                 ? 'form-control border-danger'
                 : 'form-control'
             "
           />
           <div
             *ngIf="
-              editdescriptionAr.invalid &&
-              (editdescriptionAr.dirty || editdescriptionAr.touched)
+              editrecipesAr.invalid &&
+              (editrecipesAr.dirty || editrecipesAr.touched)
             "
             class="text-danger"
           >
-            <p class="text-danger" *ngIf="editdescriptionAr.errors.required">
+            <p class="text-danger" *ngIf="editrecipesAr.errors.required">
               هذه الخانة مطلوبة
             </p>
-            <p class="text-danger" *ngIf="editdescriptionAr.errors.pattern">
+            <p class="text-danger" *ngIf="editrecipesAr.errors.pattern">
               يجب إدخال وصف الوجبة باللغة العربية
             </p>
           </div>
@@ -461,25 +488,25 @@
         <div class="col-lg-3 col-12">
           <label for="">وصف الوجبة باللغة الانجليزية</label>
           <input
-            formControlName="descriptionEn"
+            formControlName="recipesEn"
             type="text"
             [class]="
-              editdescriptionEn.invalid && editdescriptionEn.touched
+              editrecipesEn.invalid && editrecipesEn.touched
                 ? 'form-control border-danger'
                 : 'form-control'
             "
           />
           <div
             *ngIf="
-              editdescriptionEn.invalid &&
-              (editdescriptionEn.dirty || editdescriptionEn.touched)
+              editrecipesEn.invalid &&
+              (editrecipesEn.dirty || editrecipesEn.touched)
             "
             class="text-danger"
           >
-            <p class="text-danger" *ngIf="editdescriptionEn.errors.required">
+            <p class="text-danger" *ngIf="editrecipesEn.errors.required">
               هذه الخانة مطلوبة
             </p>
-            <p class="text-danger" *ngIf="editdescriptionEn.errors.pattern">
+            <p class="text-danger" *ngIf="editrecipesEn.errors.pattern">
               يجب إدخال اسم الوجبة باللغة الانجليزية
             </p>
           </div>
@@ -504,26 +531,6 @@
             </p>
           </div>
         </div>
-        <div class="col-lg-3 col-12">
-          <label for="">السعر</label>
-          <input
-            formControlName="price"
-            type="text"
-            [class]="
-              editprice.invalid && editprice.touched
-                ? 'form-control border-danger'
-                : 'form-control'
-            "
-          />
-          <div
-            *ngIf="editprice.invalid && (editprice.dirty || editprice.touched)"
-            class="text-danger"
-          >
-            <p class="text-danger" *ngIf="editprice.errors.required">
-              هذه الخانة مطلوبة
-            </p>
-          </div>
-        </div>
       </div>
 
       <div class="row">
@@ -539,7 +546,7 @@
       </div>
     </form>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" *ngIf="dataLoaded">
     <button
       type="submit"
       class="btn btn-success"

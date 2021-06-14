@@ -1,5 +1,5 @@
 .bg-dark {
-  background-color: #1b1b1b!important;
+  background-color: #5f0000!important;
 }
 
 .navbar-brand {
@@ -14,4 +14,8 @@
 
 .navbar-dark .navbar-nav .nav-link {
   font-size: 22px;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
+  color: #ffe000;
 }

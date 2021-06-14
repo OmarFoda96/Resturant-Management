@@ -5,11 +5,12 @@ export interface MealsModel {
   image: string;
   count: number;
   price: number;
-  descriptionAr: string;
-  descriptionEn: string;
+  recipesAr: string;
+  recipesEn: string;
   nameAr: string;
   nameEn: string;
   categoryId: number;
   category: CategoriesModel;
   attachment: string[];
+  countRefund: number;
 }

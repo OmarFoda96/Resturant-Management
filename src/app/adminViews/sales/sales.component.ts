@@ -65,14 +65,14 @@ export class SalesComponent implements OnInit {
   selectedGov: CartModel;
   search(key) {
     this.transactions = this.govs.filter((element: CartModel) => {
-      return element.product.nameAr.includes(key);
+      return element.meal.nameAr.includes(key);
     });
   }
   searchByCategory(key) {
     this.transactions = this.govs;
     if (key.value != 'null') {
       this.transactions = this.govs.filter((element: CartModel) => {
-        return element.product.categoryId == key.value;
+        return element.meal.categoryId == key.value;
       });
     }
   }

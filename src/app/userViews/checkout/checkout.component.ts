@@ -47,7 +47,7 @@ export class CheckoutComponent implements OnInit {
   }
   getfinalPrice() {
     this.kinds.forEach((element) => {
-      this.finalPrice += element.priceProduct * element.count;
+      this.finalPrice += +element.priceProduct * +element.count;
     });
   }
   goPayment() {

@@ -47,11 +47,11 @@ export class MealsComponent implements OnInit {
     ]),
     count: new FormControl(null, [Validators.required]),
     price: new FormControl(null, [Validators.required]),
-    descriptionAr: new FormControl(null, [
+    recipesAr: new FormControl(null, [
       Validators.required,
       Validators.pattern('^[\u0621-\u064A0-9 ]+$'),
     ]),
-    descriptionEn: new FormControl(null, [
+    recipesEn: new FormControl(null, [
       Validators.required,
       Validators.pattern('[a-zA-Z .\\w!@_-]*'),
     ]),
@@ -68,11 +68,11 @@ export class MealsComponent implements OnInit {
     ]),
     count: new FormControl(null, [Validators.required]),
     price: new FormControl(null, [Validators.required]),
-    descriptionAr: new FormControl(null, [
+    recipesAr: new FormControl(null, [
       Validators.required,
       Validators.pattern('^[\u0621-\u064A0-9 ]+$'),
     ]),
-    descriptionEn: new FormControl(null, [
+    recipesEn: new FormControl(null, [
       Validators.required,
       Validators.pattern('[a-zA-Z .\\w!@_-]*'),
     ]),
@@ -91,11 +91,11 @@ export class MealsComponent implements OnInit {
   get inputprice() {
     return this.form.controls.price;
   }
-  get inputdescriptionAr() {
-    return this.form.controls.descriptionAr;
+  get inputrecipesAr() {
+    return this.form.controls.recipesAr;
   }
-  get inputdescriptionEn() {
-    return this.form.controls.descriptionEn;
+  get inputrecipesEn() {
+    return this.form.controls.recipesEn;
   }
   get inputcategoryId() {
     return this.form.controls.categoryId;
@@ -112,11 +112,11 @@ export class MealsComponent implements OnInit {
   get editprice() {
     return this.editForm.controls.price;
   }
-  get editdescriptionAr() {
-    return this.editForm.controls.descriptionAr;
+  get editrecipesAr() {
+    return this.editForm.controls.recipesAr;
   }
-  get editdescriptionEn() {
-    return this.editForm.controls.descriptionEn;
+  get editrecipesEn() {
+    return this.editForm.controls.recipesEn;
   }
   get editcategoryId() {
     return this.editForm.controls.categoryId;
@@ -177,6 +177,7 @@ export class MealsComponent implements OnInit {
     this.modalService.open(content, this.ngbModalOptions);
   }
   onSubmit() {
+    this.dataLoaded = false;
     for (const key in this.form.value) {
       if (key !== 'photo') {
         this.Attachment.append(key, this.form.value[key]);
@@ -203,6 +204,7 @@ export class MealsComponent implements OnInit {
     );
   }
   onSubmitEdit() {
+    this.dataLoaded = false;
     for (const key in this.editForm.value) {
       if (key !== 'photo') {
         this.Attachment.append(key, this.editForm.value[key]);
@@ -238,12 +240,8 @@ export class MealsComponent implements OnInit {
     this.editForm.controls.nameEn.setValue(this.selectedProduct.nameEn);
     this.editForm.controls.count.setValue(this.selectedProduct.count);
     this.editForm.controls.price.setValue(this.selectedProduct.price);
-    this.editForm.controls.descriptionAr.setValue(
-      this.selectedProduct.descriptionAr
-    );
-    this.editForm.controls.descriptionEn.setValue(
-      this.selectedProduct.descriptionEn
-    );
+    this.editForm.controls.recipesAr.setValue(this.selectedProduct.recipesAr);
+    this.editForm.controls.recipesEn.setValue(this.selectedProduct.recipesEn);
     this.editForm.controls.categoryId.setValue(this.selectedProduct.categoryId);
   }
   openDelete(content2, gov) {

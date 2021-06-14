@@ -50,6 +50,7 @@
                   <th scope="col">النوع</th>
                   <th scope="col">الرصيد</th>
                   <th scope="col">نوع الحساب</th>
+                  <th scope="col">عدد مرات الارجاع</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -60,6 +61,7 @@
                   <td>{{ item.gender == "1" ? "ذكر" : "انثى" }}</td>
                   <td>{{ item.balance }} جنيه مصري</td>
                   <td>{{ item.roles == "1" ? "مشتري" : "ادمن" }}</td>
+                  <td>{{ item.countRefund }}</td>
                   <td
                     (click)="deleteUser(content2, item)"
                     class="text-center cursor-pointer"
