@@ -10,7 +10,7 @@
     <div class="col-12">
       <table class="table table-striped table-hover">
         <thead>
-          <tr>
+          <tr class="bg-primary text-light">
             <th>#</th>
             <th scope="col" class="text-center">عدد الوجبات</th>
             <th scope="col">تاريخ الشراء</th>
@@ -28,10 +28,10 @@
             <td>{{ item.finalPrice }} جنيه مصري</td>
             <td
               (click)="refund(item, content2)"
-              class="text-center cursor-pointer text-danger"
+              class="text-center cursor-pointer text-primary font-weight-bold"
               ngbTooltip="تريد ارجاع الوجبة؟"
             >
-              <i class="fas fa-undo"></i>
+              ارجاع الوجبة
             </td>
           </tr>
         </tbody>

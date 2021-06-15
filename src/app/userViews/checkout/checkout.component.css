@@ -10,3 +10,8 @@ td {
 * {
   text-align: right;
 }
+
+.bg-primary, .btn-primary {
+  background-color: #5f0000!important;
+  border: 0;
+}

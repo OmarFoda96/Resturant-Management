@@ -52,3 +52,9 @@ li {
   font-size: 20px;
   list-style-type: arabic-indic;
 }
+
+.btn-primary, .btn-success {
+  background-color: #5f0000!important;
+  color: #fff;
+  border: 0;
+}

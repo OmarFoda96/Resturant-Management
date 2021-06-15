@@ -36,3 +36,13 @@ body {
 p {
   color: #fff;
 }
+
+.btn-primary, .btn-outline-primary, .btn-success {
+  background-color: #5f0000!important;
+  color: #fff;
+  border: 0!important;
+}
+
+.btn-primary:focus, .btn-success:focus {
+  box-shadow: 0 0!important;
+}

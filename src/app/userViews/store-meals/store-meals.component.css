@@ -23,3 +23,13 @@
   border: 1px solid #6e6e6e;
   border-radius: 5px;
 }
+
+.btn-warning, .btn-outline-primary {
+  background-color: #5f0000!important;
+  color: #fff;
+  border: 0;
+}
+
+.btn-outline-primary:focus {
+  box-shadow: 0 0 0;
+}

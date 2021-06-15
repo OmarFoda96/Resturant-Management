@@ -2,7 +2,7 @@ import { MealsModel } from './Meals.Interface';
 export interface CartModel {
   meal: MealsModel;
   count: number;
-  priceProduct: number;
+  priceMeals: number;
   isDone: boolean;
   createdAt: Date;
   id: number;
